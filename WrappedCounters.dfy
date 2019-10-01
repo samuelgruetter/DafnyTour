@@ -46,7 +46,7 @@ module V2 {
         ghost var Repr: set<object>
         predicate Valid() reads this, Repr
         method inc() requires Valid() modifies Repr 
-                    ensures Valid() && Repr == old(Repr)
+                     ensures Valid() && Repr == old(Repr)
         method get() returns (res: nat) requires Valid()
     }
 
@@ -115,7 +115,7 @@ module V3 {
         ghost var Repr: set<object>
         predicate Valid() reads this, Repr
         method inc() requires Valid() modifies Repr decreases Repr 
-                    ensures Valid() && Repr == old(Repr)
+                     ensures Valid() && Repr == old(Repr)
         method get() returns (res: nat) requires Valid() decreases Repr
     }
 

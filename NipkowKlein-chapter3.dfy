@@ -32,18 +32,8 @@ function aval(a: aexp, s: state): val
 
 lemma Example0()
 {
-  var y := aval(Plus(N(3), V("x")), x => 0);
-  // The following line confirms that y is 3.  If you don't know what y is, you can use the
-  // verification debugger to figure it out, like this:  Put any value in the assert (for example,
-  // "assert y == 0;".  If you're lucky and picked the right value, the verifier will prove the
-  // assertion for you.  If the verifier says it's unable to prove it, then click on the error
-  // (in the Dafny IDE), which brings up the verification debugger.  There, inspect the value
-  // of y.  This is probably the right value, but due to incompleteness in the verifier, it
-  // could happen that the value you see is some value that verifier wasn't able to properly
-  // exclude.  Therefore, it's best to now take the value you see in the verification debugger,
-  // say K, and put that into the assert ("assert y == K;"), to have the verifier confirm that
-  // K really is the answer.
-  assert y == 3;
+  var y := aval(Plus(N(3), V("x")), x => 2);
+  assert y == 5;
 }
 
 // ----- constant folding -----
@@ -61,7 +51,7 @@ function asimp_const(a: aexp): aexp
       Plus(as0, as1)
 }
 
-lemma AsimpConst(a: aexp, s: state)
+lemma /*{:induction a}*/ AsimpConst(a: aexp, s: state)
   ensures aval(asimp_const(a), s) == aval(a, s)
 {
   // by induction

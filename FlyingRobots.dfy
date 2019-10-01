@@ -268,6 +268,7 @@ method Main()
   var b0 := new Bot();
   var b1 := new Bot();
   FlyRobots(b0, b1);
+  FlyRobots(b0, b0); // <-- works too!
   FlyRobots(b0, b1);
   FlyRobots(b1, b0);
 
