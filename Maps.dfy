@@ -1,22 +1,22 @@
 // Translated from https://github.com/mit-plv/coqutil/blob/master/src/coqutil/Map/TestGoals.v
 
-predicate Extends<K, V>(m1: map<K, V>, m2: map<K, V>) {
+ghost predicate Extends<K, V>(m1: map<K, V>, m2: map<K, V>) {
     forall k :: k in m2 ==> k in m1 && m1[k] == m2[k]
 }
 
-predicate UndefOn<K(!new), V>(m: map<K, V>, p: K -> bool) {
+ghost predicate UndefOn<K(!new), V>(m: map<K, V>, p: K -> bool) {
     forall k :: p(k) ==> k !in m
 }
 
-predicate Disjoint<K(!new)>(p1: K -> bool, p2: K -> bool) {
+ghost predicate Disjoint<K(!new)>(p1: K -> bool, p2: K -> bool) {
     forall k :: !(p1(k) && p2(k))
 }
 
-predicate Subset<K(!new)>(p1: K -> bool, p2: K -> bool) {
+ghost predicate Subset<K(!new)>(p1: K -> bool, p2: K -> bool) {
     forall k :: p1(k) ==> p2(k)
 }
 
-predicate OnlyDiffer<K(!new), V>(m1: map<K, V>, p: K -> bool, m2: map<K, V>) {
+ghost predicate OnlyDiffer<K(!new), V>(m1: map<K, V>, p: K -> bool, m2: map<K, V>) {
     forall k :: p(k) || (k !in m1 && k !in m2) || (k in m1 && k in m2 && m1[k] == m2[k])
 }
 
